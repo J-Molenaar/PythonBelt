@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {%load static%}
+        <link rel="stylesheet" href="{% static 'main/style.css' %}">
+        <title>Details</title>
+    </head>
+    <body>
+
+        <div class="wrapper">
+            <a href="{% url 'main:index' %}">Home</a> <a href="/logout">Logout</a>
+        <h1>Trip Details:</h1><br>
+        <h2>{{destination.destination}}</h2>
+        <h3>Planned by: {{destination.creator}}</h3>
+        <h3>Travel Date From: {{destination.start}}</h3>
+        <h3>Travel Date To: {{destination.end}}</h3>
+
+        <h1>Other Users joining this trip</h1>
+        {%for x in users %}
+          <h3>{{x.name}}</h3>
+        {%endfor%}
+    </div>
+    </body>
+</html>

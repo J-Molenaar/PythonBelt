@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {%load static%}
+        <link rel="stylesheet" href="{% static 'main/style.css' %}">
+        <title>Add Travel</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <a href="{% url 'main:index' %}">Home</a> <a href="/logout">Logout</a>
+        <h2>Add a trip:</h2>
+            <form action="{% url 'main:add_trip' %}" method="POST">
+              {% csrf_token %}
+              <label for="destination">Destination:<input type="text" name="destination"></label><br>
+              <label for="description">Description:<input type="text" name="description" rows="2" cols="30"></label><br>
+              <label for="start">Start Date:<input type="date" name="start"></label><br>
+              <label for="end">End Date:<input type="date" name="end"></label><br>
+              <input type="submit" name="submit" value="Submit">
+            </form>
+            {% if messages %}
+              {% for message in messages %}
+                <p style="color: red;"> {{ message }} </p>
+              {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+</html>

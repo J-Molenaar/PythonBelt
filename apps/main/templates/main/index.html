@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {%load static%}
+        <link rel="stylesheet" href="{% static 'main/style.css' %}">
+        <title>Travel</title>
+    </head>
+    <body>
+      <div class="wrapper">
+          <div>
+           <a href="/logout">Logout</a>
+          </div>
+          <h1>Welcome {{request.session.user_name}}!</h1>
+          <h2>Your Trip Schedules:</h2>
+          <table>
+            <thead>
+              <th>Destination</th>
+              <th>Travel Start Date</th>
+              <th>Travel End Date</th>
+              <th>Plan</th>
+            </thead>
+            <tbody>
+            {%for trip in user_trips%}
+              <tr>
+                <td><a href="{% url 'main:details' id=trip.id %}">{{trip.destination}}</a></td>
+                <td>{{trip.description}}</td>
+                <td>{{trip.start}}</td>
+                <td>{{trip.end}}</td>
+              </tr>
+            {%endfor%}
+            </tbody>
+        </table><br>
+          <h2>Other User's Travel Plans::</h2>
+          <table>
+            <thead>
+              <th>Name</th>
+              <th>Destination</th>
+              <th>Travel Start Date</th>
+              <th>Travel End Date</th>
+              <th>Do you want to Join?</th>
+            </thead>
+            <tbody>
+            {%for trip in other_trips%}
+              <tr>
+                <td>{{trip.creator}}</td>
+                <td><a href="{% url 'main:details' id=trip.id %}">{{trip.destination}}</a></td>
+                <td>{{trip.start}}</td>
+                <td>{{trip.end}}</td>
+                <td><a href="{% url 'main:join' id=trip.id %}">Join</a></td>
+              </tr>
+            {%endfor%}
+            </tbody>
+          </table>
+          <a href="{% url 'main:add'%}">Add a Travel</a>
+      </div>
+    </body>
+</html>
